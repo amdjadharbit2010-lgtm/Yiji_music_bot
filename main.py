@@ -89,7 +89,7 @@ instruments = ["piano", "guitar", "violin", "trumpet", "accordion", "drums"]
 moods = ["sad", "happy", "calm", "energetic", "romantic", "mysterious"]
 levels = ["beginner", "intermediate", "advanced"]
 
-app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build(
+app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
 app.add_handler(CommandHandler("start", start))
 for i in instruments:
     app.add_handler(CallbackQueryHandler(choose_style, pattern=f"^{i}$"))
