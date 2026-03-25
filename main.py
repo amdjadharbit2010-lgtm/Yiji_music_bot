@@ -65,7 +65,7 @@ Include:
 5. A second variation of the melody
 
 Format it clearly and make it unique every time."""
-    response = model.generate_content(prompt)
+    response = await model.generate_content_async(prompt)
     keyboard = [[InlineKeyboardButton("🔄 Generate Again", callback_data=level),
                  InlineKeyboardButton("🏠 Start Over", callback_data="restart")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
