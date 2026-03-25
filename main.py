@@ -98,4 +98,4 @@ for m in moods:
 for l in levels:
     app.add_handler(CallbackQueryHandler(generate_notes, pattern=f"^{l}$"))
 app.add_handler(CallbackQueryHandler(restart, pattern="^restart$"))
-app.run_polling()
+app.run_polling(drop_pending_updates=True)
