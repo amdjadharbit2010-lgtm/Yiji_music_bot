@@ -89,7 +89,7 @@ instruments = ["piano", "guitar", "violin", "trumpet", "accordion", "drums"]
 moods = ["sad", "happy", "calm", "energetic", "romantic", "mysterious"]
 levels = ["beginner", "intermediate", "advanced"]
 
-app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
+app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build(
 app.add_handler(CommandHandler("start", start))
 for i in instruments:
     app.add_handler(CallbackQueryHandler(choose_style, pattern=f"^{i}$"))
@@ -98,4 +98,10 @@ for m in moods:
 for l in levels:
     app.add_handler(CallbackQueryHandler(generate_notes, pattern=f"^{l}$"))
 app.add_handler(CallbackQueryHandler(restart, pattern="^restart$"))
-app.run_polling(drop_pending_updates=True)
+import asyncio
+
+async def main():
+    await app.bot.delete_webhook(drop_pending_updates=True)
+    await app.run_polling()
+
+asyncio.run(main())
